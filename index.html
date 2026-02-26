@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>数电发票开具 · 操作指引</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "微软雅黑", "Microsoft YaHei", "PingFang SC", sans-serif;
+      background: #f0f4f8;
+      color: #2d3748;
+      padding: 40px 20px;
+    }
+    .page {
+      max-width: 820px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+      overflow: hidden;
+    }
+    .header {
+      background: linear-gradient(135deg, #1e3a5f 0%, #2e6da4 100%);
+      padding: 40px 48px 32px;
+      color: #fff;
+    }
+    .header .tag {
+      display: inline-block;
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 20px;
+      font-size: 12px;
+      padding: 3px 14px;
+      margin-bottom: 14px;
+      letter-spacing: 1px;
+    }
+    .header h1 { font-size: 32px; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; }
+    .header p { font-size: 14px; opacity: 0.80; line-height: 1.8; }
+    .header .badges { margin-top: 18px; display: flex; gap: 10px; flex-wrap: wrap; }
+    .badge {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.30);
+      border-radius: 6px;
+      padding: 4px 14px;
+      font-size: 12px;
+      color: #fff;
+    }
+    .body { padding: 40px 48px; }
+    .section-title {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 16px; font-weight: 700; color: #1e3a5f;
+      margin: 32px 0 14px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #d0e4f7;
+    }
+    .section-title .icon {
+      width: 28px; height: 28px;
+      background: #2e6da4; border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 14px; flex-shrink: 0;
+    }
+    .info-box {
+      background: #eaf4fb;
+      border-left: 4px solid #2e6da4;
+      border-radius: 0 8px 8px 0;
+      padding: 14px 18px;
+      font-size: 14px; color: #1a4a72; line-height: 1.8;
+    }
+    .path-box {
+      background: #f0f7ff;
+      border: 1px solid #b8d9f5;
+      border-radius: 8px;
+      padding: 14px 20px;
+      font-size: 14px; color: #1e3a5f; font-weight: 600;
+      display: flex; align-items: center; flex-wrap: wrap;
+      gap: 6px; line-height: 2;
+    }
+    .path-box .arrow { color: #2e6da4; font-size: 16px; }
+    .path-box .node {
+      background: #2e6da4; color: #fff;
+      border-radius: 5px; padding: 2px 10px; font-size: 13px;
+    }
+    .steps { display: flex; flex-direction: column; gap: 14px; }
+    .step-card {
+      display: flex; gap: 16px;
+      background: #f8fbff;
+      border: 1px solid #dceefb;
+      border-radius: 10px;
+      padding: 16px 20px;
+    }
+    .step-num {
+      width: 34px; height: 34px;
+      background: linear-gradient(135deg, #2e6da4, #1e3a5f);
+      border-radius: 50%; color: #fff;
+      font-size: 15px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 2px;
+    }
+    .step-content { flex: 1; }
+    .step-text { font-size: 14px; color: #2d3748; line-height: 1.8; margin-bottom: 8px; }
+    .step-text strong { color: #1e3a5f; }
+    .step-screenshot {
+      background: #e8f0fe;
+      border: 1.5px dashed #7aaddb;
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-size: 12px; color: #5a7fa0; font-style: italic;
+    }
+    .warn-list { display: flex; flex-direction: column; gap: 10px; }
+    .warn-item {
+      display: flex; gap: 12px;
+      background: #fff8f0;
+      border: 1px solid #f5cba7;
+      border-left: 4px solid #e67e22;
+      border-radius: 0 8px 8px 0;
+      padding: 12px 16px;
+      font-size: 14px; color: #6e3a0f; line-height: 1.8;
+    }
+    .warn-icon { font-size: 18px; flex-shrink: 0; }
+    .faq-list { display: flex; flex-direction: column; gap: 14px; }
+    .faq-item { border: 1px solid #d0e4f7; border-radius: 10px; overflow: hidden; }
+    .faq-q {
+      background: #eaf4fb; padding: 12px 18px;
+      font-size: 14px; font-weight: 700; color: #1e3a5f;
+      display: flex; gap: 10px; align-items: flex-start;
+    }
+    .q-tag {
+      background: #2e6da4; color: #fff;
+      border-radius: 4px; padding: 1px 8px;
+      font-size: 12px; flex-shrink: 0; margin-top: 1px;
+    }
+    .faq-a {
+      background: #fff; padding: 12px 18px;
+      font-size: 14px; color: #4a5568; line-height: 1.9;
+      display: flex; gap: 10px; align-items: flex-start;
+    }
+    .faq-a span:last-child {
+      flex: 1;
+      line-height: 1.9;
+    }
+
+    .a-tag {
+      background: #27ae60; color: #fff;
+      border-radius: 4px; padding: 1px 8px;
+      font-size: 12px; flex-shrink: 0; margin-top: 1px;
+    }
+    .footer {
+      background: #f0f4f8;
+      border-top: 1px solid #d0e4f7;
+      padding: 20px 48px;
+      text-align: center;
+      font-size: 13px; color: #718096;
+    }
+    .footer strong { color: #2e6da4; }
+    @media print {
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        color-adjust: exact !important;
+      }
+      body {
+        background: #fff !important;
+        padding: 0 !important;
+      }
+      .page {
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        max-width: 100% !important;
+      }
+    }
+
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="tag">电子税务局 · 操作指引</div>
+    <h1>数电发票开具</h1>
+    <p>本指引适用于企业（一般纳税人 / 小规模纳税人）及个体工商户<br>
+       请按步骤操作，如遇问题请拨打 <strong>12366</strong> 纳税服务热线</p>
+    <div class="badges">
+      <span class="badge">🏢 企业版</span>
+      <span class="badge">👤 个体工商户版</span>
+      <span class="badge">🖥️ 网页端 </span>
+    </div>
+  </div>
+
+  <div class="body">
+
+    <div class="section-title"><div class="icon">一</div>适用对象</div>
+    <div class="info-box">
+      ✅ &nbsp;已完成<strong>税务登记</strong>，且已完成<strong>发票申领（票种核定）</strong>的纳税人<br>
+      ✅ &nbsp;需要向购买方开具增值税发票（普票或专票）的企业及个体工商户
+    </div>
+
+    <div class="section-title"><div class="icon">二</div>操作路径</div>
+    <div class="path-box">
+      <span class="node">电子税务局首页</span>
+      <span class="arrow">→</span>
+      <span class="node">我要办税</span>
+      <span class="arrow">→</span>
+      <span class="node">发票使用</span>
+      <span class="arrow">→</span>
+      <span class="node">蓝字发票开具</span>
+    </div>
+
+    <div class="section-title"><div class="icon">三</div>操作步骤</div>
+    <div class="steps">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-text">登录电子税务局，点击顶部菜单 <strong>【我要办税】</strong></div>
+          <div class="step-screenshot">
+            <img src="images/step1.png" style="width:100%; border-radius:6px;" />
+          </div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-text">选择 <strong>【蓝字发票开具】</strong>，点击 <strong>【立即开票】</strong></div>
+          <div class="step-screenshot">
+            <img src="images/step2.png" style="width:100%; border-radius:6px;" />
+          </div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-text">填写<strong>购买方信息</strong>：名称 / 税号 / 地址电话 / 银行账号</div>
+          <div class="step-screenshot">📷 截图占位：购买方信息填写界面示例</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-text">填写<strong>商品或服务明细</strong>：名称、数量、单价、税率</div>
+          <div class="step-screenshot">📷 截图占位：商品明细填写界面示例</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <div class="step-text">确认金额无误后，点击 <strong>【开具】</strong></div>
+          <div class="step-screenshot">📷 截图占位：确认页面及【开具】按钮标注</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">6</div>
+        <div class="step-content">
+          <div class="step-text">开具成功后，可选择 <strong>【发送至邮箱】</strong> 或 <strong>【二维码交付】</strong> 或 <strong>【下载 PDF/OFD/XML】</strong></div>
+          <div class="step-screenshot">📷 截图占位：开具成功页面，发送/下载按钮标注</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-title"><div class="icon">四</div>注意事项</div>
+    <div class="warn-list">
+      <div class="warn-item">
+        <span class="warn-icon">⚠️</span>
+        <span><strong>税率选择错误</strong>是最常见的问题，请在开具前提前确认适用税率（如：一般货物 13%、服务 6% 等；小规模1%或3%）。</span>
+      </div>
+      <div class="warn-item">
+        <span class="warn-icon">⚠️</span>
+        <span><strong>购买方税号</strong>必须填写正确，否则对方将无法进行进项税额抵扣。</span>
+      </div>
+      <div class="warn-item">
+        <span class="warn-icon">⚠️</span>
+        <span>数电发票开具后将<strong>实时推送至购买方</strong>，请务必确认所有信息无误后再点击【开具】。</span>
+      </div>
+    </div>
+
+    <div class="section-title"><div class="icon">五</div>常见问题（FAQ）</div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q"><span class="q-tag">Q1</span>开具后发现金额或信息填写有误，怎么办？</div>
+        <div class="faq-a">
+          <span class="a-tag">A</span>
+          <span>需先对该张发票进行 <strong>【发票冲红】</strong> 操作，冲红成功后再重新开具正确的发票。（具体操作请参见《发票冲红》章节）</span>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q"><span class="q-tag">Q2</span>购买方没有收到发票，怎么处理？</div>
+        <div class="faq-a">
+          <span class="a-tag">A</span>
+          <span>可在 <strong>【发票查询统计】</strong> 中找到对应发票，选择 <strong>【重新发送】</strong>，填写购买方邮箱后再次推送。</span>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q"><span class="q-tag">Q3</span>发票额度不足，无法开具，怎么办？</div>
+        <div class="faq-a">
+          <span class="a-tag">A</span>
+          <span>请前往 <strong>【我要办税】→【发票使用】→【额度调整申请】</strong>，提交申请后等待税务机关审核通过。</span>
+        </div>
+      </div>
+    </div>
+
+
+  <div class="footer">
+    如操作过程中遇到问题，请拨打纳税服务热线 <strong>12366</strong> 获取帮助 &nbsp;|&nbsp; 本手册由税务局办税服务厅制作
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>残保金申报 · 操作指引</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "微软雅黑", "Microsoft YaHei", "PingFang SC", sans-serif;
+      background: #f0f4f8;
+      color: #2d3748;
+      padding: 40px 20px;
+    }
+    .page {
+      max-width: 820px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+      overflow: hidden;
+    }
+    .header {
+      background: linear-gradient(135deg, #1e3a5f 0%, #2e6da4 100%);
+      padding: 40px 48px 32px;
+      color: #fff;
+    }
+    .header .tag {
+      display: inline-block;
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 20px;
+      font-size: 12px;
+      padding: 3px 14px;
+      margin-bottom: 14px;
+      letter-spacing: 1px;
+    }
+    .header h1 { font-size: 32px; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; }
+    .header p { font-size: 14px; opacity: 0.80; line-height: 1.8; }
+    .header .badges { margin-top: 18px; display: flex; gap: 10px; flex-wrap: wrap; }
+    .badge {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.30);
+      border-radius: 6px;
+      padding: 4px 14px;
+      font-size: 12px;
+      color: #fff;
+    }
+    .body { padding: 40px 48px; }
+    .section-title {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 16px; font-weight: 700; color: #1e3a5f;
+      margin: 32px 0 14px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #d0e4f7;
+    }
+    .section-title .icon {
+      width: 28px; height: 28px;
+      background: #2e6da4; border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 14px; flex-shrink: 0;
+    }
+    .info-box {
+      background: #eaf4fb;
+      border-left: 4px solid #2e6da4;
+      border-radius: 0 8px 8px 0;
+      padding: 14px 18px;
+      font-size: 14px; color: #1a4a72; line-height: 1.8;
+    }
+    .path-box {
+      background: #f0f7ff;
+      border: 1px solid #b8d9f5;
+      border-radius: 8px;
+      padding: 14px 20px;
+      font-size: 14px; color: #1e3a5f; font-weight: 600;
+      display: flex; align-items: center; flex-wrap: wrap;
+      gap: 6px; line-height: 2;
+    }
+    .path-box .arrow { color: #2e6da4; font-size: 16px; }
+    .path-box .node {
+      background: #2e6da4; color: #fff;
+      border-radius: 5px; padding: 2px 10px; font-size: 13px;
+    }
+    .period-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+    }
+    .period-table th {
+      background: #2e6da4;
+      color: #fff;
+      padding: 10px 16px;
+      text-align: left;
+      font-weight: 600;
+    }
+    .period-table td {
+      padding: 10px 16px;
+      border-bottom: 1px solid #d0e4f7;
+      color: #2d3748;
+      background: #f8fbff;
+    }
+    .period-table tr:last-child td { border-bottom: none; }
+    .period-table tr:nth-child(even) td { background: #eaf4fb; }
+    .highlight { color: #2e6da4; font-weight: 700; }
+    .formula-box {
+      background: #f0f7ff;
+      border: 1.5px solid #b8d9f5;
+      border-left: 4px solid #2e6da4;
+      border-radius: 0 8px 8px 0;
+      padding: 14px 20px;
+      font-size: 14px; color: #1e3a5f;
+      line-height: 2; margin-bottom: 10px;
+    }
+    .formula-box .formula-title {
+      font-weight: 700; margin-bottom: 6px; color: #1e3a5f;
+    }
+    .formula-box .formula-content {
+      background: #fff;
+      border: 1px solid #d0e4f7;
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-size: 13px; color: #2d3748; line-height: 1.9;
+    }
+    .tier-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+      margin-top: 10px;
+    }
+    .tier-table th {
+      background: #2e6da4;
+      color: #fff;
+      padding: 10px 16px;
+      text-align: left;
+      font-weight: 600;
+    }
+    .tier-table td {
+      padding: 10px 16px;
+      border-bottom: 1px solid #d0e4f7;
+      background: #f8fbff;
+      color: #2d3748;
+      line-height: 1.8;
+    }
+    .tier-table tr:last-child td { border-bottom: none; }
+    .tier-table tr:nth-child(even) td { background: #eaf4fb; }
+    .steps { display: flex; flex-direction: column; gap: 14px; }
+    .step-card {
+      display: flex; gap: 16px;
+      background: #f8fbff;
+      border: 1px solid #dceefb;
+      border-radius: 10px;
+      padding: 16px 20px;
+    }
+    .step-num {
+      width: 34px; height: 34px;
+      background: linear-gradient(135deg, #2e6da4, #1e3a5f);
+      border-radius: 50%; color: #fff;
+      font-size: 15px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 2px;
+    }
+    .step-content { flex: 1; }
+    .step-text { font-size: 14px; color: #2d3748; line-height: 1.8; margin-bottom: 8px; }
+    .step-text strong { color: #1e3a5f; }
+    .step-screenshot {
+      background: #e8f0fe;
+      border: 1.5px dashed #7aaddb;
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-size: 12px; color: #5a7fa0; font-style: italic;
+    }
+    .tip-box {
+      background: #f0f7ff;
+      border: 1px solid #b8d9f5;
+      border-left: 4px solid #2e6da4;
+      border-radius: 0 8px 8px 0;
+      padding: 10px 16px;
+      font-size: 13px; color: #1a4a72;
+      margin-top: 8px; line-height: 1.8;
+    }
+    /* 承诺字样式 */
+    .promise-row {
+      display: flex; gap: 10px; margin: 10px 0 6px;
+    }
+    .promise-char {
+      width: 44px; height: 44px;
+      background: linear-gradient(135deg, #2e6da4, #1e3a5f);
+      border-radius: 8px; color: #fff;
+      font-size: 20px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 6px rgba(46,109,164,0.25);
+    }
+    .promise-arrow {
+      display: flex; align-items: center;
+      color: #2e6da4; font-size: 18px; font-weight: 700;
+    }
+    .warn-list { display: flex; flex-direction: column; gap: 10px; }
+    .warn-item {
+      display: flex; gap: 12px;
+      background: #fff8f0;
+      border: 1px solid #f5cba7;
+      border-left: 4px solid #e67e22;
+      border-radius: 0 8px 8px 0;
+      padding: 12px 16px;
+      font-size: 14px; color: #6e3a0f; line-height: 1.8;
+    }
+    .warn-icon { font-size: 18px; flex-shrink: 0; }
+    .faq-list { display: flex; flex-direction: column; gap: 14px; }
+    .faq-item { border: 1px solid #d0e4f7; border-radius: 10px; overflow: hidden; }
+    .faq-q {
+      background: #eaf4fb; padding: 12px 18px;
+      font-size: 14px; font-weight: 700; color: #1e3a5f;
+      display: flex; gap: 10px; align-items: flex-start;
+    }
+    .q-tag {
+      background: #2e6da4; color: #fff;
+      border-radius: 4px; padding: 1px 8px;
+      font-size: 12px; flex-shrink: 0; margin-top: 1px;
+    }
+    .faq-a {
+      background: #fff; padding: 12px 18px;
+      font-size: 14px; color: #4a5568; line-height: 1.9;
+      display: flex; gap: 10px; align-items: flex-start;
+    }
+    .faq-a span:last-child { flex: 1; line-height: 1.9; }
+    .a-tag {
+      background: #27ae60; color: #fff;
+      border-radius: 4px; padding: 1px 8px;
+      font-size: 12px; flex-shrink: 0; margin-top: 1px;
+    }
+    .footer {
+      background: #f0f4f8;
+      border-top: 1px solid #d0e4f7;
+      padding: 20px 48px;
+      text-align: center;
+      font-size: 13px; color: #718096;
+    }
+    .footer strong { color: #2e6da4; }
+    @media print {
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        color-adjust: exact !important;
+      }
+      body { background: #fff !important; padding: 0 !important; }
+      .page { box-shadow: none !important; border-radius: 0 !important; max-width: 100% !important; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+<div class="header">
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+    <div class="tag" style="margin-bottom:0;">电子税务局 · 操作指引</div>
+    <a href="../index.html" style="
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.35);
+      color: #fff;
+      text-decoration: none;
+      font-size: 12px;
+      padding: 4px 14px;
+      border-radius: 20px;
+      transition: background 0.2s;
+      white-space: nowrap;
+    "
+    onmouseover="this.style.background='rgba(255,255,255,0.30)'"
+    onmouseout="this.style.background='rgba(255,255,255,0.18)'">
+      ← 返回目录
+    </a>
+  </div>
+
+    <h1>残保金申报</h1>
+    <p>本指引适用于依法申报残疾人就业保障金的用人单位<br>
+       请按步骤操作，如遇问题请拨打 <strong>12366</strong> 纳税服务热线</p>
+    <div class="badges">
+      <span class="badge">🏢 企业版</span>
+      <span class="badge">📅 按年申报</span>
+      <span class="badge">🖥️ 网页端</span>
+      <span class="badge">📋 2026年度</span>
+    </div>
+  </div>
+
+  <div class="body">
+
+    <div class="section-title"><div class="icon">一</div>适用对象</div>
+    <div class="info-box">
+      ✅ &nbsp;在中国境内依法登记注册的<strong>所有用人单位</strong>均须按期完成申报<br>
+      ✅ &nbsp;安排残疾人就业未达到在职职工总数 <strong>1.5%</strong> 比例的单位，须按规定缴纳残保金<br>
+      ✅ &nbsp;安排比例已达标，或在职职工人数 <strong>30 人（含）以下</strong>的企业，<strong>免于缴款</strong>，但仍须完成申报
+    </div>
+
+    <div class="section-title"><div class="icon">二</div>申报时间说明</div>
+    <table class="period-table">
+      <tr>
+        <th>项目</th>
+        <th>说明</th>
+      </tr>
+      <tr>
+        <td><span class="highlight">申报周期</span></td>
+        <td>每年申报一次，申报上一自然年度数据</td>
+      </tr>
+      <tr>
+        <td><span class="highlight">申报缴费期限</span></td>
+        <td>自 <strong>2024年起</strong>，广西残保金申报缴费期限调整为每年 <strong>1月1日至12月31日</strong></td>
+      </tr>
+      <tr>
+        <td><span class="highlight">在职职工人数 ≤ 30 人</span></td>
+        <td>依法<strong>免征</strong>残保金（政策执行期：2023年1月1日—2027年12月31日），但仍须完成申报</td>
+      </tr>
+    </table>
+
+    <div class="section-title"><div class="icon">三</div>残保金计算公式</div>
+
+    <div class="formula-box">
+      <div class="formula-title">📌 情形一：单位有安排残疾人职工</div>
+      <div class="formula-content">
+        应缴残保金 = （在职职工人数 × 1.5% － 实际安排残疾人就业人数）× 在职职工年平均工资<br><br>
+        ⚠️ 在职职工年平均工资<strong>超过全区社会平均工资 2 倍</strong>的部分，按<strong>全区社会平均工资 2 倍</strong>计征
+      </div>
+    </div>
+
+    <div class="formula-box">
+      <div class="formula-title">📌 情形二：单位无残疾人职工</div>
+      <div class="formula-content">
+        应缴残保金 = 在职职工工资总额 × 1.5%<br><br>
+        ⚠️ 同样受社会平均工资 2 倍上限约束
+      </div>
+    </div>
+
+    <div class="formula-box">
+      <div class="formula-title">📌 分档减缴政策（2023年1月1日—2027年12月31日）</div>
+      <div class="formula-content">
+        <table class="tier-table">
+          <tr>
+            <th>安排残疾人就业比例</th>
+            <th>实际缴纳比例</th>
+          </tr>
+          <tr>
+            <td>达到 <strong>1.5%</strong>（所在地规定比例）及以上</td>
+            <td>✅ <strong>无需缴纳</strong></td>
+          </tr>
+          <tr>
+            <td>达到 <strong>1%（含）</strong>，但未达到 1.5%</td>
+            <td>按应缴费额的 <strong>50%</strong> 缴纳</td>
+          </tr>
+          <tr>
+            <td>比例在 <strong>1% 以下</strong></td>
+            <td>按应缴费额的 <strong>90%</strong> 缴纳</td>
+          </tr>
+          <tr>
+            <td>在职职工人数 <strong>30 人（含）以下</strong>的企业</td>
+            <td>✅ <strong>免征</strong></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="section-title"><div class="icon">四</div>操作路径</div>
+    <div class="path-box">
+      <span class="node">电子税务局首页</span>
+      <span class="arrow">→</span>
+      <span class="node">我要办税</span>
+      <span class="arrow">→</span>
+      <span class="node">税费申报及缴纳</span>
+      <span class="arrow">→</span>
+      <span class="node">非税收入申报</span>
+      <span class="arrow">→</span>
+      <span class="node">残疾人就业保障金申报</span>
+    </div>
+
+    <div class="section-title"><div class="icon">五</div>操作步骤</div>
+    <div class="steps">
+
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-text">登录电子税务局，依次点击 <strong>【我要办税】</strong> → <strong>【税费申报及缴纳】</strong> → <strong>【非税收入申报】</strong> → <strong>【残疾人就业保障金申报】</strong>，点击 <strong>【填写申报】</strong></div>
+          <div class="step-screenshot">
+            <img src="images/canbj_step1.png" style="width:100%; border-radius:6px;" />
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-text">也可从首页的 <strong>【我的待办】</strong> → <strong>【本期应申报】</strong> 进入；确认申报所属年度，核对无误后进入填报页面</div>
+          <div class="step-screenshot">
+            <img src="images/canbj_step2.png" style="width:100%; border-radius:6px;" />
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-text">填写以下<strong>基本信息</strong>，系统将根据填报数据<strong>自动计算应缴保障金金额</strong>，请仔细核对计算结果是否正确：</div>
+          <div class="step-text">
+            &nbsp;&nbsp;• <strong>上年度在职职工工资总额</strong><br>
+            &nbsp;&nbsp;• <strong>上年度在职职工人数</strong>
+          </div>
+          <div class="step-screenshot">
+            <img src="images/canbj_step3.png" style="width:100%; border-radius:6px;" />
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-text">确认信息无误后，点击 <strong>【提交申报】</strong>。页面将弹出承诺确认框，依次点击</div>
+          <div class="promise-row">
+            <div class="promise-char">真</div>
+            <div class="promise-arrow">→</div>
+            <div class="promise-char">实</div>
+            <div class="promise-arrow">→</div>
+            <div class="promise-char">责</div>
+            <div class="promise-arrow">→</div>
+            <div class="promise-char">任</div>
+          </div>
+          <div class="step-text" style="margin-top:8px;">四个字后，再点击 <strong>【确定】</strong> 即可申报成功</div>
+          <div class="step-screenshot">
+            <img src="images/canbj_step4.png" style="width:100%; border-radius:6px;" />
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <div class="step-text">申报成功后，若有应缴金额，点击 <strong>【立即缴款】</strong>，选择<strong>缴款方式</strong>完成缴纳；若应缴金额为 0，直接完成申报即可</div>
+          <div class="step-screenshot">
+            <img src="images/canbj_step5.png" style="width:100%; border-radius:6px;" />
+          </div>
+          <div class="tip-box">✅ 申报完成后，建议截图留存备查。</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="section-title"><div class="icon">六</div>注意事项</div>
+    <div class="warn-list">
+      <div class="warn-item">
+        <span class="warn-icon">⚠️</span>
+        <span><strong>所有用人单位均须按期申报</strong>，即使本年度无需缴款（达标或免征），也必须在规定期限内完成申报，逾期将面临处罚。</span>
+      </div>
+      <div class="warn-item">
+        <span class="warn-icon">⚠️</span>
+        <span><strong>在职职工人数及工资总额须准确填报</strong>，数据填报有误将直接影响应缴金额计算，请以实际数据为准，不得漏报或少报。</span>
+      </div>
+      <div class="warn-item">
+        <span class="warn-icon">⚠️</span>
+        <span><strong>工资上限约束</strong>：在职职工年平均工资超过全区社会平均工资 2 倍的，按 2 倍上限计征，全区社会平均工资以自治区人力资源社会保障厅、财政厅每年公布数据为准。</span>
+      </div>
+      <div class="warn-item">
+        <span class="warn-icon">⚠️</span>
+        <span><strong>申报缴费期限</strong>：自 2024 年起，广西残保金申报缴费期限为每年 <strong>1月1日至12月31日</strong>，请勿逾期。</span>
+      </div>
+    </div>
+
+    <div class="section-title"><div class="icon">七</div>常见问题（FAQ）</div>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <div class="faq-q"><span class="q-tag">Q1</span>公司在职人数不足 30 人，还需要申报吗？</div>
+        <div class="faq-a">
+          <span class="a-tag">A</span>
+          <span>需要申报，但<strong>免于缴纳</strong>残保金（政策执行期至2027年12月31日）。申报时系统会自动识别人数不足 30 人，应缴金额显示为 0，提交申报即可完成。</span>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q"><span class="q-tag">Q2</span>公司已安排了残疾员工，为什么系统还显示有应缴金额？</div>
+        <div class="faq-a">
+          <span class="a-tag">A</span>
+          <span>请确认该残疾员工是否已在<strong>残联系统完成登记备案</strong>，并与税务系统完成数据对接。如已备案但系统未显示，请联系主管税务机关或残联核实数据同步情况。</span>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q"><span class="q-tag">Q3</span>申报后发现填写数据有误，怎么办？</div>
+        <div class="faq-a">
+          <span class="a-tag">A</span>
+          <span>可在申报截止日期前，进入 <strong>【申报更正与作废】</strong> 找到对应申报表，点击 <strong>【更正】</strong> 重新填写提交。截止日期后请联系主管税务机关处理。</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+<div class="footer">
+  如操作过程中遇到问题，请拨打纳税服务热线 <strong>12366</strong> 获取帮助 &nbsp;|&nbsp; 本手册由税务局办税服务厅制作
+  <div style="margin-top: 12px;">
+    <a href="../index.html" style="
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #2e6da4;
+      color: #fff;
+      text-decoration: none;
+      font-size: 13px;
+      padding: 7px 20px;
+      border-radius: 20px;
+      transition: background 0.2s;
+    "
+    onmouseover="this.style.background='#1e3a5f'"
+    onmouseout="this.style.background='#2e6da4'">
+      ← 返回目录
+    </a>
+  </div>
+</div>
+
+
+
+</div>
+</body>
+</html>

@@ -1,1 +1,520 @@
- 
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>增值税申报（小规模）· 操作指引</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "微软雅黑", "Microsoft YaHei", "PingFang SC", sans-serif;
+      background: #f0f4f8;
+      color: #2d3748;
+      padding: 40px 20px;
+      overflow-x: hidden;
+    }
+    .page {
+      max-width: 820px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+      overflow: hidden;
+    }
+    .header {
+      background: linear-gradient(135deg, #1e3a5f 0%, #2e6da4 100%);
+      padding: 40px 48px 32px;
+      color: #fff;
+    }
+    .header .tag {
+      display: inline-block;
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 20px;
+      font-size: 12px;
+      padding: 3px 14px;
+      margin-bottom: 14px;
+      letter-spacing: 1px;
+    }
+    .header h1 { font-size: 32px; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; }
+    .header p { font-size: 14px; opacity: 0.80; line-height: 1.8; }
+    .header .badges { margin-top: 18px; display: flex; gap: 10px; flex-wrap: wrap; }
+    .badge {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.30);
+      border-radius: 6px;
+      padding: 4px 14px;
+      font-size: 12px;
+      color: #fff;
+    }
+    .body { padding: 40px 48px; }
+    .section-title {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 16px; font-weight: 700; color: #1e3a5f;
+      margin: 32px 0 14px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #d0e4f7;
+    }
+    .section-title .icon {
+      width: 28px; height: 28px;
+      background: #2e6da4; border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 14px; flex-shrink: 0;
+    }
+    .info-box {
+      background: #eaf4fb;
+      border-left: 4px solid #2e6da4;
+      border-radius: 0 8px 8px 0;
+      padding: 14px 18px;
+      font-size: 14px; color: #1a4a72; line-height: 1.8;
+    }
+    .path-box {
+      background: #f0f7ff;
+      border: 1px solid #b8d9f5;
+      border-radius: 8px;
+      padding: 14px 20px;
+      font-size: 14px; color: #1e3a5f; font-weight: 600;
+      display: flex; align-items: center; flex-wrap: wrap;
+      gap: 6px; line-height: 2;
+    }
+    .path-box .arrow { color: #2e6da4; font-size: 16px; }
+    .path-box .node {
+      background: #2e6da4; color: #fff;
+      border-radius: 5px; padding: 2px 10px; font-size: 13px;
+    }
+    .period-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+    }
+    .period-table th {
+      background: #2e6da4;
+      color: #fff;
+      padding: 10px 16px;
+      text-align: left;
+      font-weight: 600;
+    }
+    .period-table td {
+      padding: 10px 16px;
+      border-bottom: 1px solid #d0e4f7;
+      color: #2d3748;
+      background: #f8fbff;
+    }
+    .period-table tr:last-child td { border-bottom: none; }
+    .period-table tr:nth-child(even) td { background: #eaf4fb; }
+    .highlight { color: #2e6da4; font-weight: 700; }
+    .steps { display: flex; flex-direction: column; gap: 14px; }
+    .step-card {
+      display: flex; gap: 16px;
+      background: #f8fbff;
+      border: 1px solid #dceefb;
+      border-radius: 10px;
+      padding: 16px 20px;
+    }
+    .step-num {
+      width: 34px; height: 34px;
+      background: linear-gradient(135deg, #2e6da4, #1e3a5f);
+      border-radius: 50%; color: #fff;
+      font-size: 15px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 2px;
+    }
+    .step-content { flex: 1; min-width: 0; }
+    .step-text { font-size: 14px; color: #2d3748; line-height: 1.8; margin-bottom: 8px; }
+    .step-text strong { color: #1e3a5f; }
+    .step-screenshot {
+      background: #e8f0fe;
+      border: 1.5px dashed #7aaddb;
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-size: 12px; color: #5a7fa0; font-style: italic;
+    }
+    .step-screenshot img { width: 100%; border-radius: 6px; display: block; }
+    .sub-step {
+      background: #f0f7ff;
+      border: 1px solid #d0e4f7;
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin: 8px 0;
+      font-size: 14px; color: #2d3748; line-height: 1.8;
+    }
+    .sub-step-title {
+      font-weight: 700; color: #1e3a5f; margin-bottom: 6px;
+    }
+    .tip-box {
+      background: #f0f7ff;
+      border: 1px solid #b8d9f5;
+      border-left: 4px solid #2e6da4;
+      border-radius: 0 8px 8px 0;
+      padding: 10px 16px;
+      font-size: 13px; color: #1a4a72;
+      margin-top: 8px; line-height: 1.8;
+    }
+    .promise-row {
+      display: flex; flex-wrap: wrap; gap: 10px; margin: 10px 0 6px;
+    }
+    .promise-char {
+      width: 44px; height: 44px;
+      background: linear-gradient(135deg, #2e6da4, #1e3a5f);
+      border-radius: 8px; color: #fff;
+      font-size: 20px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 6px rgba(46,109,164,0.25);
+    }
+    .promise-arrow {
+      display: flex; align-items: center;
+      color: #2e6da4; font-size: 18px; font-weight: 700;
+    }
+    .warn-list { display: flex; flex-direction: column; gap: 10px; }
+    .warn-item {
+      display: flex; gap: 12px;
+      background: #fff8f0;
+      border: 1px solid #f5cba7;
+      border-left: 4px solid #e67e22;
+      border-radius: 0 8px 8px 0;
+      padding: 12px 16px;
+      font-size: 14px; color: #6e3a0f; line-height: 1.8;
+    }
+    .warn-icon { font-size: 18px; flex-shrink: 0; }
+    .faq-list { display: flex; flex-direction: column; gap: 14px; }
+    .faq-item { border: 1px solid #d0e4f7; border-radius: 10px; overflow: hidden; }
+    .faq-q {
+      background: #eaf4fb; padding: 12px 18px;
+      font-size: 14px; font-weight: 700; color: #1e3a5f;
+      display: flex; gap: 10px; align-items: flex-start;
+    }
+    .q-tag {
+      background: #2e6da4; color: #fff;
+      border-radius: 4px; padding: 1px 8px;
+      font-size: 12px; flex-shrink: 0; margin-top: 1px;
+    }
+    .faq-a {
+      background: #fff; padding: 12px 18px;
+      font-size: 14px; color: #4a5568; line-height: 1.9;
+      display: flex; gap: 10px; align-items: flex-start;
+    }
+    .faq-a span:last-child { flex: 1; line-height: 1.9; }
+    .a-tag {
+      background: #27ae60; color: #fff;
+      border-radius: 4px; padding: 1px 8px;
+      font-size: 12px; flex-shrink: 0; margin-top: 1px;
+    }
+    .footer {
+      background: #f0f4f8;
+      border-top: 1px solid #d0e4f7;
+      padding: 20px 48px;
+      text-align: center;
+      font-size: 13px; color: #718096;
+    }
+    .footer strong { color: #2e6da4; }
+    @media print {
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        color-adjust: exact !important;
+      }
+      body { background: #fff !important; padding: 0 !important; }
+      .page { box-shadow: none !important; border-radius: 0 !important; max-width: 100% !important; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+      <div class="tag" style="margin-bottom:0;">电子税务局 · 操作指引</div>
+      <a href="../index.html" style="
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(255,255,255,0.18);
+        border: 1px solid rgba(255,255,255,0.35);
+        color: #fff;
+        text-decoration: none;
+        font-size: 12px;
+        padding: 4px 14px;
+        border-radius: 20px;
+        transition: background 0.2s;
+        white-space: nowrap;
+      "
+      onmouseover="this.style.background='rgba(255,255,255,0.30)'"
+      onmouseout="this.style.background='rgba(255,255,255,0.18)'">
+        ← 返回目录
+      </a>
+    </div>
+    <h1>增值税申报（小规模）</h1>
+    <p>本指引适用于小规模纳税人（含个体工商户）按期进行增值税及附加税费申报<br>
+       请按步骤操作，如遇问题请拨打 <strong>12366</strong> 纳税服务热线</p>
+    <div class="badges">
+      <span class="badge">🏪 小规模纳税人</span>
+      <span class="badge">👤 个体工商户</span>
+      <span class="badge">🖥️ 网页端</span>
+      <span class="badge">📅 按季 / 按月申报</span>
+    </div>
+  </div>
+
+  <div class="body">
+
+    <div class="section-title"><div class="icon">一</div>适用对象</div>
+    <div class="info-box">
+      ✅ &nbsp;已完成<strong>税务登记</strong>的小规模纳税人（企业或个体工商户）<br>
+      ✅ &nbsp;年应税销售额未超过 <strong>500 万元</strong>，未登记为一般纳税人<br>
+      ✅ &nbsp;需按规定期限完成增值税及附加税费申报的纳税人
+    </div>
+
+    <div class="section-title"><div class="icon">二</div>申报周期与免税政策</div>
+    <table class="period-table">
+      <tr>
+        <th>项目</th>
+        <th>说明</th>
+        <th>关键时间点/标准</th>
+      </tr>
+      <tr>
+        <td><span class="highlight">申报期限</span></td>
+        <td>由主管税务机关核定（通常为按季）</td>
+        <td>期终后次月 <strong>15 日</strong>前</td>
+      </tr>
+      <tr>
+        <td><span class="highlight">免税标准</span></td>
+        <td>小规模纳税人普惠性政策</td>
+        <td>月销售额 ≤ 10 万元 <br>（或季度 ≤ 30 万元）</td>
+      </tr>
+      <tr>
+        <td><span class="highlight">特殊情况</span></td>
+        <td>开具<strong>增值税专用发票</strong></td>
+        <td style="color:#d9534f;">专票部分<strong>不可免税</strong>，需缴纳税款</td>
+      </tr>
+    </table>
+
+    <div class="section-title"><div class="icon">三</div>操作路径</div>
+    <div class="info-box" style="margin-bottom:10px;">
+      以下三种方式均可进入申报功能，任选其一即可：
+    </div>
+    <div class="path-box" style="margin-bottom:8px;">
+      <span style="color:#1e3a5f; font-size:12px; flex-shrink:0;">方式一</span>
+      <span class="node">我要办税</span>
+      <span class="arrow">→</span>
+      <span class="node">税费申报及缴纳</span>
+      <span class="arrow">→</span>
+      <span class="node">增值税及附加税费申报（小规模纳税人）</span>
+    </div>
+    <div class="path-box" style="margin-bottom:8px;">
+      <span style="color:#1e3a5f; font-size:12px; flex-shrink:0;">方式二</span>
+      <span class="node">首页</span>
+      <span class="arrow">→</span>
+      <span class="node">我的待办</span>
+      <span class="arrow">→</span>
+      <span class="node">本期应申报</span>
+      <span class="arrow">→</span>
+      <span class="node">点击对应申报任务进入</span>
+    </div>
+    <div class="path-box">
+      <span style="color:#1e3a5f; font-size:12px; flex-shrink:0;">方式三</span>
+      <span class="node">首页搜索栏</span>
+      <span class="arrow">→</span>
+      <span class="node">输入"增值税及附加税费申报（小规模纳税人）"</span>
+      <span class="arrow">→</span>
+      <span class="node">点击搜索结果进入</span>
+    </div>
+
+    <div class="section-title"><div class="icon">四</div>操作步骤</div>
+    <div class="steps">
+
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-text">登录电子税务局后，点击 <strong>【我要办税】</strong> → <strong>【税费申报及缴纳】</strong> → <strong>【增值税及附加税费申报（小规模纳税人）】</strong> 功能菜单</div>
+          <div class="step-screenshot">
+            <img src="images/3.1/3.1-01-menu.png" />
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-text">进入系统后，根据纳税人身份特征和历史涉税行为，系统自动匹配申报模式，分为<strong>确认式申报</strong>和<strong>填表式申报</strong>两种：</div>
+
+          <div class="sub-step">
+            <div class="sub-step-title">（一）确认式申报模式</div>
+            <div class="step-text">
+              <strong>第1步：</strong>系统展示税（费）数据，纳税人对数据结果进行确认
+            </div>
+            <div class="step-screenshot" style="margin-bottom:10px;">
+              <img src="images/3.1/3.1-02-confirm.png" />
+            </div>
+            <div class="step-text">
+              <strong>第2步：</strong>确认销售收入是否正确。如存在<strong>未开票收入</strong>，可分类补录：
+            </div>
+            <div class="step-text">
+              &nbsp;&nbsp;• 点击 <strong>【货物及劳务销售额】</strong> 输入框 → 补录货物及劳务未开票收入 → 点击【确认】<br>
+              &nbsp;&nbsp;• 点击 <strong>【服务、不动产和无形资产销售额】</strong> 输入框 → 补录对应未开票收入 → 点击【确认】
+            </div>
+            <div class="step-screenshot" style="margin-bottom:10px;">
+              <img src="images/3.1/3.1-03-uninvoiced.png" />
+            </div>
+            <div class="step-text">
+              <strong>第3步：</strong>如需切换为填表模式，点击 <strong>【我要填表】</strong> 进入填表式申报；填写完成后点击 <strong>【提交】</strong>
+            </div>
+            <div class="step-screenshot" style="margin-bottom:10px;">
+              <img src="images/3.1/3.1-04-form.png" />
+            </div>
+            <div class="tip-box">💡 进入填表模式后，注意查看申报表左侧的<strong>动态展示选择</strong>，按实际情况勾选。</div>
+            <div class="step-text" style="margin-top:10px;">
+              <strong>第4步：</strong>确认数据无误后，点击 <strong>【提交】</strong>。页面将弹出承诺确认框，依次点击
+            </div>
+            <div class="promise-row">
+              <div class="promise-char">真</div>
+              <div class="promise-arrow">→</div>
+              <div class="promise-char">实</div>
+              <div class="promise-arrow">→</div>
+              <div class="promise-char">责</div>
+              <div class="promise-arrow">→</div>
+              <div class="promise-char">任</div>
+            </div>
+            <div class="step-text" style="margin-top:8px;">四个字后，再点击 <strong>【确定】</strong> 即可申报成功</div>
+            <div class="step-screenshot">
+              <img src="images/3.1/3.1-05-promise.png" />
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-text"><strong>表间比对 / 申报比对说明：</strong></div>
+          <div class="step-text">
+            &nbsp;&nbsp;• <strong>提交时比对不通过</strong>：根据提示信息修改申报表数据。若出现<strong>强制性比对不通过</strong>，系统将无法提交申报，必须修正后方可继续。
+          </div>
+          <div class="step-screenshot" style="margin-bottom:10px;">
+            <img src="images/3.1/3.1-06-check-fail.png" />
+          </div>
+          <div class="step-text">
+            &nbsp;&nbsp;• <strong>申报完成后比对</strong>：系统将申报数据与后台数据进行比对，若存在强制性校验不通过，将弹出提示，请按提示处理。
+          </div>
+          <div class="step-screenshot">
+            <img src="images/3.1/3.1-07-check-after.png" />
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-text">申报成功后，若有应缴税款，点击 <strong>【立即缴款】</strong>，选择缴款方式完成本次申报涉及的税费款缴纳；若税款为 0，直接完成申报即可</div>
+          <div class="step-screenshot">
+            <img src="images/3.1/3.1-08-payment.png" />
+          </div>
+          <div class="tip-box">✅ 申报完成后，建议截图或下载<strong>申报表</strong>留存备查。</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="section-title"><div class="icon">五</div>注意事项</div>
+    <div class="warn-list">
+      <!-- 新增第一条：专票警示 -->
+      <div class="warn-item" style="border-left-color: #d9534f; background: #fff5f5;">
+        <span class="warn-icon" style="color: #d9534f;">🛑</span>
+        <span><strong>专票不免税：</strong>若本期开具了<strong>增值税专用发票</strong>，无论销售额是否未达免税标准，专票对应的税额<strong>必须缴纳</strong>，不可享受免税。</span>
+      </div>
+      <div class="warn-item">
+        <span class="warn-icon">⚠️</span>
+        <span><strong>零申报也必须按时申报！</strong>即使本期无销售收入，也需在规定期限内完成零申报，逾期将产生罚款并影响纳税信用。</span>
+      </div>
+      <div class="warn-item">
+        <span class="warn-icon">⚠️</span>
+        <span><strong>销售额填写口径</strong>：按本期开具发票的所有<strong>不含税金额</strong>合计填报，同时加上未开票的不含税收入。</span>
+      </div>
+      <div class="warn-item">
+        <span class="warn-icon">⚠️</span>
+        <span><strong>申报截止日期</strong>为每季度（或每月）结束后次月 15 日，遇法定节假日顺延，请提前完成申报，避免逾期。</span>
+      </div>
+    </div>
+
+    <div class="section-title"><div class="icon">六</div>常见问题（FAQ）</div>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <div class="faq-q"><span class="q-tag">Q1</span>本季度没有收入，还需要申报吗？</div>
+        <div class="faq-a">
+          <span class="a-tag">A</span>
+          <span>需要。即使本期无收入，也必须进行<strong>零申报</strong>。所有销售额填写 0，提交即可。未按时申报将被税务机关列为非正常户，并可能面临罚款。</span>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q"><span class="q-tag">Q2</span>申报后发现填错了数据，怎么办？</div>
+        <div class="faq-a">
+          <span class="a-tag">A</span>
+          <span>可在申报截止日期前，进入 <strong>【申报更正与作废】</strong> 找到该申报表，点击 <strong>【更正】</strong> 重新填写提交。截止日期后需联系主管税务机关处理。</span>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q"><span class="q-tag">Q3</span>缴款时银行扣款失败，怎么处理？</div>
+        <div class="faq-a">
+          <span class="a-tag">A</span>
+          <span>请检查绑定银行账户的<strong>余额是否充足</strong>，以及账户是否处于正常状态。也可切换其他支付方式（如<strong>云闪付</strong>等）重新发起缴款，或前往办税服务厅柜台缴纳。</span>
+        </div>
+      </div>
+     
+      <div class="faq-item">
+        <div class="faq-q"><span class="q-tag">Q4</span>季度销售额没超 30 万，为什么还要缴税？</div>
+        <div class="faq-a">
+          <span class="a-tag">A</span>
+          <span>请检查是否开具了<strong>增值税专用发票</strong>。专票部分无论金额大小均需缴税。若全部为普票或未开票收入且未超标准，则享受免税。</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 本节小结 -->
+    <div class="section-title" style="margin-top:40px;">
+      <div class="icon">七</div>
+      本节小结
+    </div>
+
+    <div class="tip-box" style="background:#f0fdf4; border-left: 4px solid #22c55e; padding: 16px 20px;">
+      ✅ <strong>本节小结：</strong>
+      <ul style="margin-top:10px; padding-left:20px; line-height:2.2; color:#1a4a72;">
+        <li>本指引适用于<strong>小规模纳税人</strong>（含个体工商户），年销售额未超过 <strong>500 万元</strong></li>
+        <li>申报周期分为<strong>按季</strong>和<strong>按月</strong>两种，截止日期均为期末次月 <strong>15 日</strong>前</li>
+        <li>系统自动匹配<strong>确认式申报</strong>或<strong>填表式申报</strong>，如有未开票收入须手动补录</li>
+        <li>月销售额 ≤ 10 万元（季 ≤ 30 万元）可<strong>免税</strong>，但仍须按期完成申报</li>
+        <li>即使本期<strong>无收入</strong>，也必须进行零申报，不可漏报</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    如操作过程中遇到问题，请拨打纳税服务热线 <strong>12366</strong> 获取帮助 &nbsp;|&nbsp; 本手册由税务局办税服务厅制作
+    <div style="margin-top: 12px;">
+      <a href="../index.html" style="
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: #2e6da4;
+        color: #fff;
+        text-decoration: none;
+        font-size: 13px;
+        padding: 7px 20px;
+        border-radius: 20px;
+        transition: background 0.2s;
+      "
+      onmouseover="this.style.background='#1e3a5f'"
+      onmouseout="this.style.background='#2e6da4'">
+        ← 返回目录
+      </a>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

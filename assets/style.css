@@ -312,6 +312,20 @@ body {
   display: block;
 }
 
+/* ---------- 步骤截图图片 ---------- */
+.step-img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #d0e4f7;
+  border-radius: 8px;
+  margin-top: 10px;
+  margin-bottom: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+
 /* ---------- 子步骤块 ---------- */
 .sub-step {
   background: #f0f7ff;

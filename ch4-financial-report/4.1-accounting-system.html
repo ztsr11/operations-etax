@@ -1,1 +1,512 @@
- 
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>财务会计制度及核算软件备案 · 操作指引</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "微软雅黑", "Microsoft YaHei", "PingFang SC", sans-serif;
+      background: #f0f4f8;
+      color: #2d3748;
+      padding: 40px 20px;
+      overflow-x: hidden;
+    }
+    .page {
+      max-width: 820px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+      overflow: hidden;
+    }
+    .header {
+      background: linear-gradient(135deg, #1e3a5f 0%, #2e6da4 100%);
+      padding: 40px 48px 32px;
+      color: #fff;
+    }
+    .header .tag {
+      display: inline-block;
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 20px;
+      font-size: 12px;
+      padding: 3px 14px;
+      margin-bottom: 14px;
+      letter-spacing: 1px;
+    }
+    .header h1 { font-size: 32px; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; }
+    .header p { font-size: 14px; opacity: 0.80; line-height: 1.8; }
+    .header .badges { margin-top: 18px; display: flex; gap: 10px; flex-wrap: wrap; }
+    .badge {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.30);
+      border-radius: 6px;
+      padding: 4px 14px;
+      font-size: 12px;
+      color: #fff;
+    }
+    .body { padding: 40px 48px; }
+    .section-title {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 16px; font-weight: 700; color: #1e3a5f;
+      margin: 32px 0 14px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #d0e4f7;
+    }
+    .section-title .icon {
+      width: 28px; height: 28px;
+      background: #2e6da4; border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 14px; flex-shrink: 0;
+    }
+    .info-box {
+      background: #eaf4fb;
+      border-left: 4px solid #2e6da4;
+      border-radius: 0 8px 8px 0;
+      padding: 14px 18px;
+      font-size: 14px; color: #1a4a72; line-height: 1.8;
+    }
+    .path-box {
+      background: #f0f7ff;
+      border: 1px solid #b8d9f5;
+      border-radius: 8px;
+      padding: 14px 20px;
+      font-size: 14px; color: #1e3a5f; font-weight: 600;
+      display: flex; align-items: center; flex-wrap: wrap;
+      gap: 6px; line-height: 2;
+    }
+    .path-box .arrow { color: #2e6da4; font-size: 16px; }
+    .path-box .node {
+      background: #2e6da4; color: #fff;
+      border-radius: 5px; padding: 2px 10px; font-size: 13px;
+    }
+    .period-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+    }
+    .period-table th {
+      background: #2e6da4;
+      color: #fff;
+      padding: 10px 16px;
+      text-align: left;
+      font-weight: 600;
+    }
+    .period-table td {
+      padding: 10px 16px;
+      border-bottom: 1px solid #d0e4f7;
+      color: #2d3748;
+      background: #f8fbff;
+    }
+    .period-table tr:last-child td { border-bottom: none; }
+    .period-table tr:nth-child(even) td { background: #eaf4fb; }
+    .highlight { color: #2e6da4; font-weight: 700; }
+    .steps { display: flex; flex-direction: column; gap: 14px; }
+    .step-card {
+      display: flex; gap: 16px;
+      background: #f8fbff;
+      border: 1px solid #dceefb;
+      border-radius: 10px;
+      padding: 16px 20px;
+    }
+    .step-num {
+      width: 34px; height: 34px;
+      background: linear-gradient(135deg, #2e6da4, #1e3a5f);
+      border-radius: 50%; color: #fff;
+      font-size: 15px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 2px;
+    }
+    .step-content { flex: 1; min-width: 0; }
+    .step-text { font-size: 14px; color: #2d3748; line-height: 1.8; margin-bottom: 8px; }
+    .step-text strong { color: #1e3a5f; }
+    .step-screenshot {
+      background: #e8f0fe;
+      border: 1.5px dashed #7aaddb;
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-size: 12px; color: #5a7fa0; font-style: italic;
+    }
+    .step-screenshot img { width: 100%; border-radius: 6px; display: block; }
+    .tip-box {
+      background: #f0f7ff;
+      border: 1px solid #b8d9f5;
+      border-left: 4px solid #2e6da4;
+      border-radius: 0 8px 8px 0;
+      padding: 10px 16px;
+      font-size: 13px; color: #1a4a72;
+      margin-top: 8px; line-height: 1.8;
+    }
+    .warn-list { display: flex; flex-direction: column; gap: 10px; }
+    .warn-item {
+      display: flex; gap: 12px;
+      background: #fff8f0;
+      border: 1px solid #f5cba7;
+      border-left: 4px solid #e67e22;
+      border-radius: 0 8px 8px 0;
+      padding: 12px 16px;
+      font-size: 14px; color: #6e3a0f; line-height: 1.8;
+    }
+    .warn-icon { font-size: 18px; flex-shrink: 0; }
+    .faq-list { display: flex; flex-direction: column; gap: 14px; }
+    .faq-item { border: 1px solid #d0e4f7; border-radius: 10px; overflow: hidden; }
+    .faq-q {
+      background: #eaf4fb; padding: 12px 18px;
+      font-size: 14px; font-weight: 700; color: #1e3a5f;
+      display: flex; gap: 10px; align-items: flex-start;
+    }
+    .q-tag {
+      background: #2e6da4; color: #fff;
+      border-radius: 4px; padding: 1px 8px;
+      font-size: 12px; flex-shrink: 0; margin-top: 1px;
+    }
+    .faq-a {
+      background: #fff; padding: 12px 18px;
+      font-size: 14px; color: #4a5568; line-height: 1.9;
+      display: flex; gap: 10px; align-items: flex-start;
+    }
+    .faq-a span:last-child { flex: 1; line-height: 1.9; }
+    .a-tag {
+      background: #27ae60; color: #fff;
+      border-radius: 4px; padding: 1px 8px;
+      font-size: 12px; flex-shrink: 0; margin-top: 1px;
+    }
+    .explain-box {
+      background: #f8fbff;
+      border: 1px solid #d0e4f7;
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin: 10px 0;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+    .explain-box .explain-title {
+      font-weight: 700;
+      color: #1e3a5f;
+      margin-bottom: 8px;
+    }
+    .explain-box ul { padding-left: 20px; margin: 8px 0; }
+    .explain-box li { margin: 6px 0; }
+    .footer {
+      background: #f0f4f8;
+      border-top: 1px solid #d0e4f7;
+      padding: 20px 48px;
+      text-align: center;
+      font-size: 13px; color: #718096;
+    }
+    .footer strong { color: #2e6da4; }
+    @media print {
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        color-adjust: exact !important;
+      }
+      body { background: #fff !important; padding: 0 !important; }
+      .page { box-shadow: none !important; border-radius: 0 !important; max-width: 100% !important; }
+      .header a, .footer a { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+      <div class="tag" style="margin-bottom:0;">电子税务局 · 操作指引</div>
+      <a href="../index.html" style="
+        display: inline-flex; align-items: center; gap: 6px;
+        background: rgba(255,255,255,0.18);
+        border: 1px solid rgba(255,255,255,0.35);
+        color: #fff; text-decoration: none;
+        font-size: 12px; padding: 4px 14px;
+        border-radius: 20px; transition: background 0.2s; white-space: nowrap;
+      "
+      onmouseover="this.style.background='rgba(255,255,255,0.30)'"
+      onmouseout="this.style.background='rgba(255,255,255,0.18)'">
+        ← 返回目录
+      </a>
+    </div>
+    <h1>财务会计制度及核算软件备案</h1>
+    <p>本指引适用于新办企业及变更会计制度的纳税人<br>
+       请按步骤操作，如遇问题请拨打 <strong>12366</strong> 纳税服务热线</p>
+    <div class="badges">
+      <span class="badge">🏢 所有企业</span>
+      <span class="badge">📋 信息报告</span>
+      <span class="badge">🖥️ 网页端</span>
+      <span class="badge">⏰ 15日内办理</span>
+    </div>
+  </div>
+
+  <div class="body">
+
+    <!-- 一、什么是财务会计制度备案 -->
+    <div class="section-title"><div class="icon">一</div>什么是财务会计制度备案</div>
+    <div class="info-box">
+      财务会计制度及核算软件备案，是纳税人向税务机关报告企业所采用的会计准则、核算方法及财务软件信息的重要事项。<br><br>
+      <strong>法律依据</strong>：《中华人民共和国税收征收管理法》规定，从事生产、经营的纳税人应当自领取税务登记证件之日起 <strong>15日内</strong>，将其财务、会计制度或者财务、会计处理办法等信息报送税务机关备案。使用计算机记账的企业，还应当在<strong>使用前</strong>将会计核算软件报税务机关备案。
+    </div>
+
+    <!-- 二、适用对象与时限 -->
+    <div class="section-title"><div class="icon">二</div>适用对象与时限</div>
+    <table class="period-table">
+      <tr>
+        <th>项目</th>
+        <th>说明</th>
+      </tr>
+      <tr>
+        <td><span class="highlight">适用对象</span></td>
+        <td>所有从事生产、经营的纳税人（包括新办企业和已办企业）</td>
+      </tr>
+      <tr>
+        <td><span class="highlight">办理时限</span></td>
+        <td>自领取税务登记证件之日起 <strong>15日内</strong> 必须完成备案</td>
+      </tr>
+      <tr>
+        <td><span class="highlight">核算软件备案</span></td>
+        <td>使用计算机记账的，应当在<strong>使用前</strong>向主管税务机关备案</td>
+      </tr>
+    </table>
+
+    <!-- 三、会计制度选择说明 -->
+    <div class="section-title"><div class="icon">三</div>会计制度选择说明</div>
+
+    <div class="info-box" style="margin-bottom: 12px;">
+      系统提供多种会计制度供选择，包括小企业会计准则、企业会计准则、企业会计制度，以及适用于特定行业或组织类型的专项制度（如个体工商户会计制度、民间非营利组织会计制度、农民专业合作社财务会计制度等）。请根据企业实际情况及主管部门要求选择适用的会计制度，如有疑问请咨询主管税务机关或专业会计人员。
+    </div>
+
+    <div class="explain-box">
+      <div class="explain-title">📘 小企业会计准则</div>
+      <strong>适用范围</strong>：在中华人民共和国境内依法设立的、符合《中小企业划型标准规定》小型标准的企业
+      <ul>
+        <li><strong>特点</strong>：简化核算，科目设置较少，操作简便</li>
+        <li><strong>不适用情形</strong>：股票或债券在市场上公开交易的小企业；金融机构或其他具有金融性质的小企业；企业集团内的母公司和子公司</li>
+      </ul>
+    </div>
+
+    <div class="explain-box">
+      <div class="explain-title">📗 企业会计准则</div>
+      <strong>适用范围</strong>：在中华人民共和国境内设立的企业，通常适用于大中型企业
+      <ul>
+        <li><strong>特点</strong>：核算全面，科目设置完整</li>
+        <li><strong>适用情形</strong>：需要对外融资、准备上市，或业务较为复杂的企业</li>
+      </ul>
+    </div>
+
+    <div class="explain-box">
+      <div class="explain-title">📙 企业会计制度</div>
+      <strong>适用范围</strong>：除金融保险企业以外的所有符合条件的大、中型企业
+      <ul>
+        <li><strong>特点</strong>：介于《小企业会计准则》和《企业会计准则》之间，目前使用较少</li>
+      </ul>
+    </div>
+
+    <!-- 四、操作路径 -->
+    <div class="section-title"><div class="icon">四</div>操作路径</div>
+    <div class="path-box">
+      <span class="node">电子税务局首页</span>
+      <span class="arrow">→</span>
+      <span class="node">我要办税</span>
+      <span class="arrow">→</span>
+      <span class="node">综合信息报告</span>
+      <span class="arrow">→</span>
+      <span class="node">制度信息报告</span>
+      <span class="arrow">→</span>
+      <span class="node">财务会计制度及核算软件备案报告</span>
+    </div>
+
+    <!-- 五、操作步骤 -->
+    <div class="section-title"><div class="icon">五</div>操作步骤</div>
+    <div class="steps">
+
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-text">登录电子税务局，依次点击 <strong>【我要办税】</strong> → <strong>【综合信息报告】</strong> → <strong>【制度信息报告】</strong> → <strong>【财务会计制度及核算软件备案报告】</strong></div>
+          <div class="step-screenshot">
+            <img src="images/4.1/4.1-01-menu.png" alt="进入备案功能菜单" />
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-text">系统自动带出部分预填信息，纳税人进行确认，对预填有误的进行修改</div>
+          <div class="step-screenshot">
+            <img src="images/4.1/4.1-02-add.png" alt="确认预填信息" />
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-text">填写 <strong>会计制度信息</strong>：</div>
+          <div class="step-text">
+            &nbsp;&nbsp;• <strong>会计制度</strong>：从下拉菜单中选择适用的会计制度<br>
+            &nbsp;&nbsp;• <strong>有效期起</strong>：填写企业成立日期或开始执行该制度的日期<br>
+            &nbsp;&nbsp;• <strong>有效期止</strong>：如长期执行，可填写"9999-12"
+          </div>
+          <div class="step-screenshot">
+            <img src="images/4.1/4.1-03-system.png" alt="会计制度信息填写" />
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-text">填写 <strong>会计核算方法</strong>：</div>
+          <div class="step-text">
+            &nbsp;&nbsp;• <strong>低值易耗品摊销方法</strong>：根据企业实际情况选择"一次摊销"或"五五摊销"<br>
+            &nbsp;&nbsp;• <strong>折旧方法</strong>：根据企业实际情况选择适用的折旧方法<br>
+            &nbsp;&nbsp;• <strong>成本核算方法</strong>：根据企业经营类型选择适用的成本核算方法<br>
+            &nbsp;&nbsp;• <strong>财务报表报送小类</strong>：系统将根据所选会计制度自动匹配
+          </div>
+          <div class="step-screenshot">
+            <img src="images/4.1/4.1-04-method.png" alt="会计核算方法填写" />
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <div class="step-text">填写 <strong>会计报表报送情况</strong>：</div>
+          <div class="step-text">
+            &nbsp;&nbsp;• <strong>按季（月）报送</strong>：选择需要按季或按月报送的报表类型<br>
+            &nbsp;&nbsp;• <strong>按年报送</strong>：选择需要按年报送的报表类型
+          </div>
+          <div class="step-screenshot">
+            <img src="images/4.1/4.1-05-report.png" alt="会计报表报送设置" />
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">6</div>
+        <div class="step-content">
+          <div class="step-text">填写 <strong>会计核算软件信息</strong>（非必填，如使用计算机记账可填写）：</div>
+          <div class="step-text">
+            &nbsp;&nbsp;• <strong>会计核算软件名称</strong>：填写企业实际使用的财务软件名称<br>
+            &nbsp;&nbsp;• <strong>会计核算软件版本号</strong>：填写软件实际版本号<br>
+            &nbsp;&nbsp;• <strong>会计核算软件数据库类型</strong>：填写软件实际使用的数据库类型，可咨询软件供应商<br>
+            &nbsp;&nbsp;• <strong>会计核算软件启用日期</strong>：填写开始使用该软件记账的日期
+          </div>
+          <div class="step-screenshot">
+            <img src="images/4.1/4.1-06-software.png" alt="核算软件信息填写" />
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">7</div>
+        <div class="step-content">
+          <div class="step-text">核对所有信息无误后，点击 <strong>【提交】</strong> 完成备案</div>
+          <div class="step-screenshot">
+            <img src="images/4.1/4.1-07-submit.png" alt="提交备案" />
+          </div>
+          <div class="tip-box">✅ 备案成功后，系统会显示"备案成功"提示，建议截图留存备查。</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 六、注意事项 -->
+    <div class="section-title"><div class="icon">六</div>注意事项</div>
+    <div class="warn-list">
+      <div class="warn-item">
+        <span class="warn-icon">⚠️</span>
+        <span><strong>必须15日内办理</strong>：从事生产、经营的纳税人应当自领取税务登记证件之日起 <strong>15日内</strong> 完成备案，逾期可能面临处罚。</span>
+      </div>
+      <div class="warn-item">
+        <span class="warn-icon">⚠️</span>
+        <span><strong>信息变更需重新备案</strong>：如会计制度、核算方法、财务软件等发生变更，应及时向税务机关重新备案，不可擅自更改。已报送财务报表后，不能修改对应属期的会计制度备案。</span>
+      </div>
+      <div class="warn-item">
+        <span class="warn-icon">⚠️</span>
+        <span><strong>小企业会计准则限制</strong>：以下三类小企业不适用《小企业会计准则》：① 股票或债券公开交易的小企业；② 金融机构或其他具有金融性质的小企业；③ 企业集团内的母公司和子公司。</span>
+      </div>
+    </div>
+
+    <!-- 七、常见问题（FAQ） -->
+    <div class="section-title"><div class="icon">七</div>常见问题（FAQ）</div>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <div class="faq-q"><span class="q-tag">Q1</span>应该选择哪种会计制度？</div>
+        <div class="faq-a">
+          <span class="a-tag">A</span>
+          <span>请根据企业实际情况选择。一般而言，规模较小、不对外筹集资金的企业可选择《小企业会计准则》；需要对外融资、准备上市或业务较为复杂的企业，建议选择《企业会计准则》。特定行业或组织类型（如个体工商户、民间非营利组织、农民专业合作社等）请选择对应的专项制度。如有疑问，请咨询主管税务机关或专业会计人员。</span>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q"><span class="q-tag">Q2</span>企业手工记账，核算软件信息是否必须填写？</div>
+        <div class="faq-a">
+          <span class="a-tag">A</span>
+          <span>核算软件信息为非必填项，手工记账的企业可不填写该部分内容。</span>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q"><span class="q-tag">Q3</span>备案后发现填错了，可以修改吗？</div>
+        <div class="faq-a">
+          <span class="a-tag">A</span>
+          <span>可以。登录电子税务局，进入<strong>【财务会计制度及核算软件备案报告】</strong>，找到已备案的记录，更正信息后重新提交即可。请注意，已报送财务报表后，不能修改对应属期的会计制度备案。</span>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q"><span class="q-tag">Q4</span>逾期没有办理备案，会有什么后果？</div>
+        <div class="faq-a">
+          <span class="a-tag">A</span>
+          <span>根据《税收征收管理法》规定，未按时限要求办理该事项的，税务机关可责令限期改正，并可处以罚款。建议尽快补办，避免影响纳税信用评级。</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 本节小结 -->
+    <div class="section-title" style="margin-top:40px;">
+      <div class="icon">八</div>
+      本节小结
+    </div>
+
+    <div class="tip-box" style="background:#f0fdf4; border-left: 4px solid #22c55e; padding: 16px 20px;">
+      ✅ <strong>本节小结：</strong>
+      <ul style="margin-top:10px; padding-left:20px; line-height:2.2; color:#1a4a72;">
+        <li>新办企业必须自领取税务登记证件之日起 <strong>15日内</strong> 完成财务会计制度备案</li>
+        <li>请根据企业实际情况选择适用的<strong>会计制度</strong>，系统提供多种制度类型供选择</li>
+        <li>核算软件信息为<strong>非必填项</strong>，使用计算机记账的企业可按实际情况填写</li>
+        <li>操作路径：<strong>我要办税 → 综合信息报告 → 制度信息报告 → 财务会计制度及核算软件备案报告</strong></li>
+        <li>已报送财务报表后，<strong>不能修改</strong>对应属期的会计制度备案</li>
+        <li>备案信息如有变更，应及时重新备案，不可随意更改已备案信息</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    如操作过程中遇到问题，请拨打纳税服务热线 <strong>12366</strong> 获取帮助 &nbsp;|&nbsp; 本手册由税务局办税服务厅制作
+    <div style="margin-top: 12px;">
+      <a href="../index.html" style="
+        display: inline-flex; align-items: center; gap: 6px;
+        background: #2e6da4; color: #fff; text-decoration: none;
+        font-size: 13px; padding: 7px 20px; border-radius: 20px; transition: background 0.2s;
+      "
+      onmouseover="this.style.background='#1e3a5f'"
+      onmouseout="this.style.background='#2e6da4'">
+        ← 返回目录
+      </a>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
